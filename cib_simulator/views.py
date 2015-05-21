@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template import Context
 from django.db.models import Q
 from django.contrib.auth import models
+from django.contrib.auth import AuthenticationForm
 
 #this is a form which might turn to index
 def index123(request):    
@@ -12,48 +13,49 @@ def index123(request):
 #def registration(request):
 
 
-def loginajax(request):                                                                                                                        
+def login(request):
+    """if request.user.is_authenticated():
+        request.session['userid'] = request.user.id
+        return HttpResponseRedirect('/index/')"""
+                                                                                                                                
     if request.method == 'POST':                                                                                                            
         request.session.set_test_cookie()                                                                                                   
         login_form = AuthenticationForm(request, request.POST)                                                                              
         if login_form.is_valid():                                                                                                           
             if request.is_ajax:                                                                                                             
-                user = django_login(request, login_form.get_user())                                                                         
+                user = django_login(request, login_form.get_user())
+                u.id = request.session.get["userid"]                                                                        
                 if user is not None:                                                                                                        
-                    return HttpResponse(request.REQUEST.get('next', '/'))   
-        return HttpResponseForbidden() # catch invalid ajax and all non ajax  
+                    #return HttpResponse(request.REQUEST.get('next', '/'))
+                    return render_to_response('index.html', u.id, context_instance=RequestContext(request))   
+            return HttpResponseForbidden() # catch invalid ajax and all non ajax  
         # if not valid users, return registration form                                                      
-    else:                                                                                                                                   
-        return login_form;
+        else:                                                                                                                                   
+            return login_form;
         #login_form = AuthenticationForm()                                                                                                                                        
     #c = Context({                                                                                                                           
         """'next': request.REQUEST.get('next'),                                                                                                
         'login_form': login_form,                                                                                                                         
         'request':request,                                                                                                                  
-    })                                                                                                                                      
-    return render_to_response('login.html', c, context_instance=RequestContext(request))"""
+        })                                                                                                                                      
+return render_to_response('login.html', c, context_instance=RequestContext(request))"""
 
 def registraion(request):
     if request.method == "POST":
-        content = login_form = AuthenticationForm(request, request.POST)
-        newRecord = ({
-            Userid= request.POST.get("Userid")
-            username= request.POST.get("username")
-            Password = request.POST.get("Password")
-            E-mail = request.POST.get("Email")
-        })
-        class User(models.Model):
+        login_form = AuthenticationForm(request, request.POST)
+        newRecord = request.get("userid","username","password","email")
+        from models import User:  #warning: invalid syntax 
             newRecord.save()
             return render_to_response('index.html', context_instance=RequestContext(request))
 
 
-def shareboards(request):
+#def shareboards(request):
 
 
-def chathistory(request):
+#def chathistory(request):
 
 
-def queries(request):
+#def queries(request):
 
 
    

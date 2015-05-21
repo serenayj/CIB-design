@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
+    'sampleapp'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,7 +91,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'Users/Serena/Desktop/mysite/db.sqlite3',                      # Or path to database file if using sqlite3.
+        'NAME': 'cib.sqlite',                      # Or path to database file if using sqlite3. the original one is "db.sqlite3", notes on MAY 20: do not use absolute path
         # The following settings are not used with sqlite3:
         'USER': 'postgres',
         'PASSWORD': '920121',
