@@ -1,7 +1,13 @@
 $(document).ready(function () {
+
+  $(function() {
+    $( "#tabs1" ).tabs();
+  });
+  
 	$('#search').click(function(){
 
-		$('#instg1').fadeOut('normal');
+		$('#tabs-1').fadeOut('normal');
+		$('#tabs-2').fadeOut('normal');
 	
 		var shopstyle = "http://api.shopstyle.com/api/v2/products?pid=uid7556-29692666-0&fts="+$("#query").val()+"&offset=0&limit=10";
 			//shopstyle = "http://api.shopstyle.com/api/v2/products?pid=YOUR_API_KEY&fts=red+dress&offset=0&limit=10"
@@ -88,15 +94,46 @@ $(document).ready(function () {
 				function commentShow(){
 					function handler(event){
 						$('#comment').click(function(){
+							//working on comment box, referenced from jsfiddle
+							var commenttext = "<div id='msgbox'><p>Please enter any additional comments:</p><textarea id='ta' rows='5' cols='30'></textarea>"
 							var target = $("#mytext").val();
-							$('#itemcomment').html(target);
+							$('#itemcomment').html(commenttext);
+							$('#msgbox').dialog({
+								autoOpen:false,
+								modal:true,
+								title: 'Add Comments',
+								buttons: {
+									Okay: function() {
+										var oldComments = $("#theDescription").html();
+										var newComments = $('#ta').val();
+										$('p.comment').html(oldComments +'<br />' + newComments);
+
+            //Do your ajax update here:
+            /*
+            $.ajax({
+                //Unsure of cfc syntax
+            });
+							*/
+										$(this).dialog('close');
+									},
+							Cancel: function() {
+								$(this).dialog('close');
+							}
+							},
+						close: function() {
+							alert('AJAX update completed');
+						}
 						});
-					}
-					$('button').click(handler).find('button').hide();
-				}
+							$('#msgbox').dialog('open');
+							//});
+						});
+                    }
+				$('button').click(handler).find('button').hide();
+			}
 
 				function ratingsShow(){
-					$
+					var testhtml = "<input id='input-2ba' type='number' class='rating' min='0' max='5' step='0.5'data-stars=5 data-size='xs' data-symbol='&#xe005;' data-default-caption='{rating} hearts' data-star-captions='{}'/>"
+					$(this).after(testhtml);
 				}
 		});
 	});

@@ -39,11 +39,12 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
       </head>
-
+      {% autoescape on %}
       <body>
         <div class="page-container">
             <h1>Login</h1>
             <form action="" method="post" id="mainform">
+                {% csrf_token %}
                 <input type="text" id="userid" class="{{userid}}" placeholder="user ID">
                 <input type="password" id="pwd" class="{{password}}" placeholder="password">
                 <button type="submit" class="signin">sign in</button>
@@ -51,12 +52,13 @@
             </form>
 
             <form id = "registration" action = "" method = "post" style = "display:none">
+                {% csrf_token %}
                 <p><label>User Id</label><input type="text" name="userid" class="{{userid}}" placeholder="user ID"></p>
                 <p><label>User Name</label><input type="text" name="username" class="{{username}}" placeholder="user name"></p>
                 <p><label>Password</label><input type="password" name="pwd" class="{{password}}" placeholder="password"></p>
                 p><label>E-mail</label><input type="text" name="email" class="{{email}}" placeholder="password"></p>
                 <p><input class="btn btn-primary" type="submit" value="submit"/>
-                {% csrf_token %}
+                
 
             </form>
             <!--<div class="connect">
@@ -68,3 +70,5 @@
             </div>-->
         </div>
       </body>
+      {% endautoescape %}
+      
