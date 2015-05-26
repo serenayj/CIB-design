@@ -6,8 +6,10 @@ $(document).ready(function () {
   
 	$('#search').click(function(){
 
-		$('#tabs-1').fadeOut('normal');
-		$('#tabs-2').fadeOut('normal');
+		
+		$('#tabs-1').fadeOut('normal'){
+			$("#tabs-2").fadeOut('normal')
+		};
 	
 		var shopstyle = "http://api.shopstyle.com/api/v2/products?pid=uid7556-29692666-0&fts="+$("#query").val()+"&offset=0&limit=10";
 			//shopstyle = "http://api.shopstyle.com/api/v2/products?pid=YOUR_API_KEY&fts=red+dress&offset=0&limit=10"
@@ -19,9 +21,10 @@ $(document).ready(function () {
 			
 				$('#productlist').html(''); // clear the div's html contents for each time the query is processed
 					for(var i=0; i< data['products'].length; i++) {
+						
 						var pre_append_text = '<div class=col-sm-6 col-md-3><div class=thumbnail><div class=caption>'
                         	+'<img src='+data['products'][i]['image']['sizes']['Best']['url']+ ' draggable=true>'
-                         	+'<h5>'+ data['products'][i]['brandedName']+ '</h5></div></div></div>';
+                         	+'<h5>'+ data['products'][i]['brandedName']['priceLabel']+'</h5></div></div></div>';
 					
 							
 				//append the product's name into the div as list elements
