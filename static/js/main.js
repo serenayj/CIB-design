@@ -31,6 +31,9 @@ $(document).ready(function () {
 						$('#catalog').append(pre_append_text);
 						
 						$(function() {
+							$("#catalog .caption").click({
+								
+							})
 							// below is the problem statement, its scope needs to be strictly defined.
 							$( "#catalog .caption" ).draggable({
 									appendTo: "body",

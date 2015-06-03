@@ -25,8 +25,9 @@
 	
     <!-- Custom styles for this template -->
     <!--the .js and .css is coming from static document-->
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'js/main.js' %}"></script>-->
     <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
@@ -41,33 +42,55 @@
       </head>
       {% autoescape on %}
       <body>
+        <style>
+        body
+        {
+
+            background: #ffffff;
+
+            color: #111111;
+
+            font-family: Georgia, "Times New Roman", Times, serif;
+
+            padding : 20px;
+
+        }
+
+        </style>
         <div class="page-container">
-            <h1>Login</h1>
-            <form action="" method="post" id="mainform">
+
+            <h3>Login</h3>
+
+            <form action="" method="post" id="form1">
                 {% csrf_token %}
-                <input type="text" id="userid" class="{{userid}}" placeholder="user ID">
-                <input type="password" id="pwd" class="{{password}}" placeholder="password">
-                <button type="submit" class="signin">sign in</button>
-                <button type="submit" class="signup">sign up</button>
+                <!--{{ form1.as_p }}--> <!--will render them wrapped in <p> tags-->
+                <p><input type="text" id="userid" class= "{{userid}}"  placeholder="user ID">
+                <p><input type="password" id="pwd" class= "{{password}}"  placeholder="password">
+                <p><button type="submit" class="signin">sign in</button>
+                <p><button type="submit" class="signup">sign up</button>
             </form>
 
-            <form id = "registration" action = "" method = "post" style = "display:none">
+            <!--
+            <br>
+            <form id = "form2" action = "" method = "post">
                 {% csrf_token %}
-                <p><label>User Id</label><input type="text" name="userid" class="{{userid}}" placeholder="user ID"></p>
-                <p><label>User Name</label><input type="text" name="username" class="{{username}}" placeholder="user name"></p>
-                <p><label>Password</label><input type="password" name="pwd" class="{{password}}" placeholder="password"></p>
-                p><label>E-mail</label><input type="text" name="email" class="{{email}}" placeholder="password"></p>
-                <p><input class="btn btn-primary" type="submit" value="submit"/>
+                {{ form1.as_p }}--> <!--will render them wrapped in <p> tags
+                <p><label>User Id</label><input type="text" id="userid" class="{{userid}}" placeholder="user ID"></p>
+                <p><label>User Name</label><input type="text" id="username" class="{{username}}" placeholder="user name"></p>
+                <p><label>Password</label><input type="password" id="pwd" class="{{password}}" placeholder="password"></p>
+                <p><label>E-mail</label><input type="text" id="email" class="{{email}}" placeholder="password"></p>
+                <p><input id='submit' class="btn btn-primary" type="submit" value="submit"/>
                 
 
             </form>
-            <!--<div class="connect">
+            <div class="connect">
                 <p>快捷</p>
                 <p>
                     <a class="facebook" href=""></a>
                     <a class="twitter" href=""></a>
                 </p>
             </div>-->
+
         </div>
       </body>
       {% endautoescape %}

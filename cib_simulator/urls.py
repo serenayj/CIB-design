@@ -13,5 +13,11 @@ urlpatterns = [
 
     url(r'^index','cib_simulator.views.index123',name='index'),
 
+    #url(r'^reg','cib_simulator.views.reg',name='reg'),
+
+    url(r'^create/$', 'cib_simulator.views.create'),
+
+    url(r'^login_view/$', 'cib_simulator.views.login_view'),
+
     #url(r'^registration',views.registration),
 ]
