@@ -3,16 +3,21 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context
+from django.template import RequestContext
 from django.db.models import Q
 from django.contrib.auth import models
-from forms import UserForm
+from forms import UserForm,LoginForm
 from django.contrib import auth
 from sampleapp.models import User
+from django.shortcuts import render_to_response
+
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 
 #from django.db.models import User
-"""from django.contrib.auth import AuthenticationForm"""
 
 #this is a form which might turn to index
 def index123(request):    
@@ -28,25 +33,30 @@ def create(request):
     form = UserForm(request.POST) 
     if form.is_valid():
         new_user = form.save()
-        return render(request, 'index.html')
+        #return render(request,'/index')
+        return redirect('/index/')
+        #return render_to_response('/index',RequestContext(request,{'userid': userid}))
         #return HttpResponseRedirect('/index/' + str(new_user.pk))
     else:
         form = UserForm()
-        return render(request, 'create_user.html', {'form': form})
+        return render(request, '/index/', {'form': form})
 
 #simple user login and save session 
 def login(request):
+    form = LoginForm(request.POST)
     return render(request,'login.html')
 
 def login_view(request):
-    userid= request.POST.get('userid', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(userid=userid, password=password)
-    if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
-        auth.login(request, user)
-        # Redirect to a success page.
-        return render_to_response('/index',RequestContext(request,{'userid': userid}))
+    if form.is_valid:
+        userid= request.POST.get('userid',None)
+        password = request.POST.get('password',None)
+        user = auth.authenticate(userid=userid, password=password)
+        request.session["userid"] = userid
+        if user is not None and user.is_active:
+            # Correct password, and the user is marked "active"
+            auth.login(request, user)
+            # Redirect to a success page.
+            return render_to_response('/index',RequestContext(request,{'userid': userid}))
     else:
         # Redirect to registration page.
         print "redirecting to registration"

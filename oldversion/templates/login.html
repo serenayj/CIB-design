@@ -27,7 +27,7 @@
     <!--the .js and .css is coming from static document-->
     <!--<script type="text/javascript" src="{% static 'js/main.js' %}"></script>-->
     <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
+    
     <link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
@@ -61,8 +61,11 @@
 
             <h3>Login</h3>
 
-            <form action="" method="post" id="form1">
+            <form action="{% url 'cib_simulator.views.login_view' %}" method="post" id="form1">
                 {% csrf_token %}
+                <div>
+                {{ form.as_p }}
+            </div>
                 <!--{{ form1.as_p }}--> <!--will render them wrapped in <p> tags-->
                 <p><input type="text" id="userid" class= "{{userid}}"  placeholder="user ID">
                 <p><input type="password" id="pwd" class= "{{password}}"  placeholder="password">
@@ -93,5 +96,7 @@
 
         </div>
       </body>
+
+      <script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
       {% endautoescape %}
       

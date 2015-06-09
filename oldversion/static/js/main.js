@@ -1,15 +1,15 @@
 $(document).ready(function () {
 
-  $(function() {
+  /*$(function() {
     $( "#tabs1" ).tabs();
-  });
+  });*/
   
 	$('#search').click(function(){
 
 		
-		$('#tabs-1').fadeOut('normal'){
+		/*$('#tabs-1').fadeOut('normal'){
 			$("#tabs-2").fadeOut('normal')
-		};
+		};*/
 	
 		var shopstyle = "http://api.shopstyle.com/api/v2/products?pid=uid7556-29692666-0&fts="+$("#query").val()+"&offset=0&limit=10";
 			//shopstyle = "http://api.shopstyle.com/api/v2/products?pid=YOUR_API_KEY&fts=red+dress&offset=0&limit=10"

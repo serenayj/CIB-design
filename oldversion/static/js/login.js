@@ -1,14 +1,38 @@
 $(document).ready(function () {
+
     $.ajaxSetup({  
                  data: {csrfmiddlewaretoken: '{{ csrf_token }}' },  
             });  
+
+    /*$.ajaxSetup({ 
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                     break;
+                 }
+             }
+         }
+         return cookieValue;
+         }
+         if (!(/^http:..test(settings.url) || /^https:..test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     } 
+}); */
 
 	$('.signin').click(function(event){
         userid = $("#userid").val();
         password = $("#password").val();
 		event.preventDefault();
             $.ajax({
-                url:"/login_view/",
                  type:"POST",
                  data:{userid:userid, password:password},
                  DataType:"html",
@@ -22,7 +46,8 @@ $(document).ready(function () {
 
     $('.signup').click(function(event){
         event.preventDefault();
-        $(this).attr("href", "create.html");
+        $(this).attr("href", "create");
+        window.location = "create"
         //window.location = "create.html"
         alert("now you are redirecting to registration page")
     })

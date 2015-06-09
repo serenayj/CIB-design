@@ -16,10 +16,11 @@ class LoginForm(ModelForm):
 		fields=("userid","password")
 
 
-class ItemsForm(ModelForm):
+"""class ItemsForm(ModelForm):
 	class Meta:
 		model = Items
 		fields = ("itemsid","itemname","comments","ratings","decision","userid_id","price")
+		"""
 
 		
 			

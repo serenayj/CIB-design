@@ -83,7 +83,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     #os.path.join(PROJECT_PATH, 'templates'),
-    os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'templates')),
+    os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'templates').replace('\\','/')),
 )
 
 # Database
