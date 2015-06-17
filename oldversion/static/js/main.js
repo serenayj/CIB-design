@@ -11,7 +11,7 @@ $(document).ready(function () {
 			$("#tabs-2").fadeOut('normal')
 		};*/
 	
-		var shopstyle = "http://api.shopstyle.com/api/v2/products?pid=uid7556-29692666-0&fts="+$("#query").val()+"&offset=0&limit=10";
+		var shopstyle = "https://api.gilt.com/v1/products?q="+$('#query').val()+"apikey=c77cb5f8dd6a77744a2c62eb2c8093c6deb0eb01f79fdf5129179b96154bdaab";
 			//shopstyle = "http://api.shopstyle.com/api/v2/products?pid=YOUR_API_KEY&fts=red+dress&offset=0&limit=10"
 		$.ajax({
 			type :"get",
@@ -21,10 +21,15 @@ $(document).ready(function () {
 			
 				$('#productlist').html(''); // clear the div's html contents for each time the query is processed
 					for(var i=0; i< data['products'].length; i++) {
+
+						var pre_texts = '<div class=col-sm-6 col-md-3><div class=thumbnail><div class=caption>'
+
+						var name_brand = data['products'][i]['brand']+data['products'][i]['name'];
+
+						for(var j=0; j< data['products'][i]['image_urls'].length; j++){
+							var image_url = '<img src='+data['products'][i]['image_urls']['sizes']['Best']['url'];
 						
-						var pre_append_text = '<div class=col-sm-6 col-md-3><div class=thumbnail><div class=caption>'
-                        	+'<img src='+data['products'][i]['image']['sizes']['Best']['url']+ ' draggable=true>'
-                         	+'<h5>'+ data['products'][i]['brandedName']['priceLabel']+'</h5></div></div></div>';
+							var pre_append_text = pre_texts+name_brand+image_url+'</div></div></div>';
 					
 							
 				//append the product's name into the div as list elements
